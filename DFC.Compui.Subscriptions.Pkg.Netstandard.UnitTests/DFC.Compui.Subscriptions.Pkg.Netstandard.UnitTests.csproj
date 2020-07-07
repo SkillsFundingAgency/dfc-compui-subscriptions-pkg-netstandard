@@ -16,6 +16,6 @@
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DFC.Compui.Subscriptions.Pkg.Netstandard\DFC.Compui.Subscriptions.Pkg.Netstandard.csproj" />
+    <ProjectReference Include="..\DFC.Compui.Subscriptions.Pkg.Subscription\DFC.Compui.Subscriptions.Pkg.Subscription.csproj" />
   </ItemGroup>
 </Project>
