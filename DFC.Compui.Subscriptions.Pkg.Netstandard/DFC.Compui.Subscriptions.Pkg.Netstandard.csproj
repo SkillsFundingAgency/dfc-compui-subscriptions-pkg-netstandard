@@ -1,17 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AzureFunctionsVersion>
-    </AzureFunctionsVersion>
+    <Nullable>enable</Nullable>
+    <CodeAnalysisRuleSet>../DFC.Digital.CodeAnalysis.ruleset</CodeAnalysisRuleSet>
     <ProjectGuid>{E0E2508E-2B08-441D-BB5D-B059A97E475B}</ProjectGuid>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.3" />
+    <AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="host.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.5" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.5" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DFC.Compui.Subscriptions.Pkg.Data\DFC.Compui.Subscriptions.Pkg.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="local.settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
