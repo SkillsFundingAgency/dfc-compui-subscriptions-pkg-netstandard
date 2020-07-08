@@ -81,7 +81,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Controllers
 
                     logger.LogInformation($"Got Event Id: {eventId}: {eventGridEvent.EventType}: Cache operation: {cacheOperation} {url}");
 
-                    var result = await webhookService.ProcessMessageAsync(cacheOperation, eventId, url).ConfigureAwait(false);
+                    var result = await webhookService.ProcessMessageAsync(cacheOperation, eventId, contentId, url).ConfigureAwait(false);
 
                     LogResult(eventId, contentId, result);
                 }

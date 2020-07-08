@@ -11,7 +11,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Data.Contracts
             where TModel : class;
 
         Task<TModel?> GetItemAsync<TModel>(Uri url)
-            where TModel : class;
+            where TModel : class, IContentItemModel;
 
         Task<TModel?> GetContentItemAsync<TModel>(LinkDetails details)
             where TModel : class;

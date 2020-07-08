@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
 {
     public class WebhooksService<TModel> : IWebhooksService
-        where TModel : class, IContentItems, IDocumentModel
+        where TModel : class, IContentItemModel, IDocumentModel
     {
         private readonly ILogger<WebhooksService<TModel>> logger;
         private readonly AutoMapper.IMapper mapper;

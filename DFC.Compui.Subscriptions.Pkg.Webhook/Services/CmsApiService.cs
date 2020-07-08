@@ -14,7 +14,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
         private readonly CmsApiClientOptions cmsApiClientOptions;
         private readonly IApiDataProcessorService apiDataProcessorService;
         private readonly HttpClient httpClient;
-        private readonly AutoMapper.IMapper mapper;
+        private readonly IMapper mapper;
 
         public CmsApiService(
             CmsApiClientOptions cmsApiClientOptions,
@@ -40,12 +40,12 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
         }
 
         public async Task<TModel?> GetItemAsync<TModel>(Uri url)
-             where TModel : class
+             where TModel : class, IContentItemModel
         {
             var pagesApiDataModel = await apiDataProcessorService.GetAsync<TModel>(httpClient, url)
                 .ConfigureAwait(false);
 
-            await GetSharedChildContentItems(pagesApiDataModel.ContentLinks, pagesApiDataModel.ContentItems).ConfigureAwait(false);
+            await GetSharedChildContentItems<TModel>(pagesApiDataModel.ContentLinks, pagesApiDataModel.ContentItems).ConfigureAwait(false);
 
             return pagesApiDataModel;
         }
