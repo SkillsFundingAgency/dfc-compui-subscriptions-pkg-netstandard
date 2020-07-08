@@ -1,4 +1,5 @@
 ﻿using DFC.Compui.Subscriptions.Pkg.Data.Contracts;
+using DFC.Compui.Subscriptions.Pkg.Data.Models;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -13,10 +14,22 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
     public class ApiService : IApiService
     {
         private readonly ILogger<ApiService> logger;
+        private readonly CmsApiClientOptions clientOptions;
 
-        public ApiService(ILogger<ApiService> logger)
+        public ApiService(ILogger<ApiService> logger, CmsApiClientOptions clientOptions)
         {
             this.logger = logger;
+            this.clientOptions = clientOptions;
+        }
+
+        public async Task<string?> GetAsync(HttpClient httpClient, string contentType, string acceptHeader)
+        {
+            return await GetAsync(httpClient, new Uri($"{this.clientOptions.BaseAddress}/{contentType}"), acceptHeader).ConfigureAwait(false);
+        }
+
+        public async Task<string?> GetAsync(HttpClient httpClient, string contentType, string id, string acceptHeader)
+        {
+            return await GetAsync(httpClient, new Uri($"{this.clientOptions.BaseAddress}/{contentType}/{id}"), acceptHeader).ConfigureAwait(false);
         }
 
         public async Task<string?> GetAsync(HttpClient? httpClient, Uri url, string acceptHeader)

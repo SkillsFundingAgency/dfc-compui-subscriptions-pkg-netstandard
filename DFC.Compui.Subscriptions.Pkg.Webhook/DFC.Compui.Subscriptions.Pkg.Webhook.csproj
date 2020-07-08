@@ -4,7 +4,7 @@
     <Nullable>enable</Nullable>
     <CodeAnalysisRuleSet>../DFC.Digital.CodeAnalysis.ruleset</CodeAnalysisRuleSet>
     <ProjectGuid>{C9DB8E79-90A6-471F-B21C-B465D0C169E2}</ProjectGuid>
-    <Version>1.1.1</Version>
+    <Version>1.4.0</Version>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />

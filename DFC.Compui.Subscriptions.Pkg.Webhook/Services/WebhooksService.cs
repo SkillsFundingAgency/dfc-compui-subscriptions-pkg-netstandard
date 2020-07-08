@@ -94,9 +94,12 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
 
             if (contentResult == HttpStatusCode.OK || contentResult == HttpStatusCode.Created)
             {
-                var contentItemIds = (from a in contentModel.ContentItems select a.ItemId!.Value).ToList();
+                if (contentModel.ContentItems != null)
+                {
+                    var contentItemIds = (from a in contentModel.ContentItems select a.ItemId!.Value).ToList();
 
-                contentCacheService.AddOrReplace(contentId, contentItemIds);
+                    contentCacheService.AddOrReplace(contentId, contentItemIds);
+                }
             }
 
             return contentResult;
@@ -129,7 +132,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
 
                 if (contentPageModel != null)
                 {
-                    var contentItemModel = contentPageModel.ContentItems.FirstOrDefault(f => f.ItemId == contentItemId);
+                    var contentItemModel = contentPageModel.ContentItems?.FirstOrDefault(f => f.ItemId == contentItemId);
 
                     if (contentItemModel != null)
                     {
@@ -165,7 +168,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
 
                 if (contentPageModel != null)
                 {
-                    var contentItemModel = contentPageModel.ContentItems.FirstOrDefault(f => f.ItemId == contentItemId);
+                    var contentItemModel = contentPageModel.ContentItems?.FirstOrDefault(f => f.ItemId == contentItemId);
 
                     if (contentItemModel != null)
                     {

@@ -32,6 +32,21 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
             return default;
         }
 
+        public async Task<TApiModel?> GetAsync<TApiModel>(HttpClient httpClient, string contentType, string id)
+          where TApiModel : class
+        {
+            _ = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+
+            var response = await apiService.GetAsync(httpClient, contentType, id, MediaTypeNames.Application.Json).ConfigureAwait(false);
+
+            if (!string.IsNullOrWhiteSpace(response))
+            {
+                return JsonConvert.DeserializeObject<TApiModel>(response);
+            }
+
+            return default;
+        }
+
         public async Task<HttpStatusCode> PostAsync<TModel>(HttpClient? httpClient, Uri url, TModel model)
             where TModel : class
         {
@@ -45,6 +60,21 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
             _ = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
 
             return await apiService.DeleteAsync(httpClient, url).ConfigureAwait(false);
+        }
+
+        public async Task<TApiModel?> GetAsync<TApiModel>(HttpClient httpClient, string contentType)
+           where TApiModel : class
+        {
+            _ = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+
+            var response = await apiService.GetAsync(httpClient, contentType, MediaTypeNames.Application.Json).ConfigureAwait(false);
+
+            if (!string.IsNullOrWhiteSpace(response))
+            {
+                return JsonConvert.DeserializeObject<TApiModel>(response);
+            }
+
+            return default;
         }
     }
 }
