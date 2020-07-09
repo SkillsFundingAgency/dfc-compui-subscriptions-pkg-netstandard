@@ -48,6 +48,10 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.WebhookServiceTests
         public async Task WebhooksServiceProcessMessageAsyncContentCreateReturnsSuccess()
         {
             // Arrange
+
+            A.CallTo(() => FakeCmsApiService.GetItemAsync<EmailModel>(A<Uri>.Ignored)).Returns(new EmailModel() { Body = "ATestBody", Id = Guid.NewGuid() });
+            A.CallTo(() => FakeEmailEventMessageService.UpdateAsync(A<EmailModel>.Ignored)).Returns(HttpStatusCode.Created);
+
             const HttpStatusCode expectedResponse = HttpStatusCode.Created;
             var url = new Uri($"https://somewhere.com/email/{Guid.NewGuid()}");
             var service = BuildWebhooksService();
@@ -56,8 +60,6 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.WebhookServiceTests
             var result = await service.ProcessMessageAsync(WebhookCacheOperation.CreateOrUpdate, Guid.NewGuid(), Guid.NewGuid(), url).ConfigureAwait(false);
 
             // Assert
-            //A.CallTo(() => FakeEmailCacheReloadService.ReloadCacheItem(A<Uri>.Ignored)).MustHaveHappenedOnceExactly();
-
             Assert.Equal(expectedResponse, result);
         }
 
@@ -65,16 +67,17 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.WebhookServiceTests
         public async Task WebhooksServiceProcessMessageAsyncContentCreateReturnsOk()
         {
             // Arrange
+            A.CallTo(() => FakeCmsApiService.GetItemAsync<EmailModel>(A<Uri>.Ignored)).Returns(new EmailModel() { Body = "ATestBody", Id = Guid.NewGuid() });
+            A.CallTo(() => FakeEmailEventMessageService.UpdateAsync(A<EmailModel>.Ignored)).Returns(HttpStatusCode.OK);
+
             const HttpStatusCode expectedResponse = HttpStatusCode.OK;
-            var url = new Uri($"https://somewhere.com/sharedcontent/{Guid.NewGuid()}");
+            var url = new Uri($"https://somewhere.com/email/{Guid.NewGuid()}");
             var service = BuildWebhooksService();
 
             // Act
             var result = await service.ProcessMessageAsync(WebhookCacheOperation.CreateOrUpdate, Guid.NewGuid(), Guid.NewGuid(), url).ConfigureAwait(false);
 
             // Assert
-            //A.CallTo(() => FakeEmailCacheReloadService.ReloadCacheItem(A<Uri>.Ignored)).MustNotHaveHappened();
-
             Assert.Equal(expectedResponse, result);
         }
 
@@ -82,6 +85,9 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.WebhookServiceTests
         public async Task WebhooksServiceProcessMessageAsyncContentDeleteSharedContentReturnsNotFound()
         {
             // Arrange
+            A.CallTo(() => FakeCmsApiService.GetItemAsync<EmailModel>(A<Uri>.Ignored)).Returns(new EmailModel() { Body = "ATestBody", Id = Guid.NewGuid() });
+            A.CallTo(() => FakeEmailEventMessageService.DeleteAsync(A<Guid>.Ignored)).Returns(HttpStatusCode.NotFound);
+
             const HttpStatusCode expectedResponse = HttpStatusCode.NotFound;
             var url = new Uri($"https://somewhere.com/sharedcontent/{Guid.NewGuid()}");
             var service = BuildWebhooksService();
@@ -90,8 +96,6 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.WebhookServiceTests
             var result = await service.ProcessMessageAsync(WebhookCacheOperation.Delete, Guid.NewGuid(), Guid.NewGuid(), url).ConfigureAwait(false);
 
             // Assert
-            //A.CallTo(() => FakeEmailCacheReloadService.ReloadCacheItem(A<Uri>.Ignored)).MustNotHaveHappened();
-
             Assert.Equal(expectedResponse, result);
         }
 
