@@ -1,5 +1,7 @@
 ﻿using DFC.Compui.Subscriptions.Pkg.Data.Contracts;
 using DFC.Compui.Subscriptions.Pkg.Webhook.Controllers;
+using DFC.Compui.Subscriptions.Pkg.Webhook.Services;
+using DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.TestModels;
 using FakeItEasy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,12 +11,14 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests
 {
-    public abstract class BaseWebhooksControllerTests
+    public abstract class BaseWebhookReceiverTests
     {
         protected const string EventTypePublished = "published";
         protected const string EventTypeDraft = "draft";
@@ -24,9 +28,9 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests
 
         protected const string ContentTypeContactUs = "contact-us";
 
-        protected BaseWebhooksControllerTests()
+        protected BaseWebhookReceiverTests()
         {
-            Logger = A.Fake<ILogger<WebhooksController>>();
+            Logger = A.Fake<ILogger<WebhookReceiver>>();
             FakeWebhooksService = A.Fake<IWebhooksService>();
         }
 
@@ -36,7 +40,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests
 
         protected Guid ItemIdForDelete { get; } = Guid.NewGuid();
 
-        protected ILogger<WebhooksController> Logger { get; }
+        protected ILogger<WebhookReceiver> Logger { get; }
 
         protected IWebhooksService FakeWebhooksService { get; }
 
@@ -58,34 +62,28 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests
             return models;
         }
 
-        protected static Stream BuildStreamFromModel<TModel>(TModel model)
+        protected async static Task<string> BuildStringContentFromModel<TModel>(TModel model)
         {
             var jsonData = JsonConvert.SerializeObject(model);
             byte[] byteArray = Encoding.ASCII.GetBytes(jsonData);
             MemoryStream stream = new MemoryStream(byteArray);
 
-            return stream;
+            using var reader = new StreamReader(stream, Encoding.UTF8);
+            string requestContent = await reader.ReadToEndAsync().ConfigureAwait(false);
+
+            return requestContent;
         }
 
-        protected WebhooksController BuildWebhooksController(string mediaTypeName)
+        protected WebhookReceiver BuildWebhookService(string mediaTypeName)
         {
             var objectValidator = A.Fake<IObjectModelValidator>();
             var httpContext = new DefaultHttpContext();
 
             httpContext.Request.Headers[HeaderNames.Accept] = mediaTypeName;
 
-            var controller = new WebhooksController(Logger, FakeWebhooksService)
-            {
-                ControllerContext = new ControllerContext()
-                {
-                    HttpContext = httpContext,
-                },
-                ObjectValidator = objectValidator,
-            };
+            var receiver = new WebhookReceiver(Logger, FakeWebhooksService);
 
-            A.CallTo(() => controller.ObjectValidator.Validate(A<ActionContext>.Ignored, A<ValidationStateDictionary>.Ignored, A<string>.Ignored, A<object>.Ignored));
-
-            return controller;
+            return receiver;
         }
     }
 }
