@@ -83,6 +83,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
 
             return new OkResult();
         }
+
         private static void ValidateData(Guid eventId, EventGridEventData eventGridEventData, out Guid contentId, out Uri url)
         {
             if (!Guid.TryParse(eventGridEventData.ItemId, out contentId))
