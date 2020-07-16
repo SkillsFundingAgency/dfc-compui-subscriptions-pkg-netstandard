@@ -55,7 +55,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
                     logger.LogInformation($"Got SubscriptionValidation event data, validationCode: {subscriptionValidationEventData!.ValidationCode},  validationUrl: {subscriptionValidationEventData.ValidationUrl}, topic: {eventGridEvent.Topic}");
 
                     // Do any additional validation (as required) such as validating that the Azure resource ID of the topic matches
-                    // the expected topic and then return back the below response
+                    // the expected topic and then return back the below responses
                     var responseData = new SubscriptionValidationResponse()
                     {
                         ValidationResponse = subscriptionValidationEventData.ValidationCode,
