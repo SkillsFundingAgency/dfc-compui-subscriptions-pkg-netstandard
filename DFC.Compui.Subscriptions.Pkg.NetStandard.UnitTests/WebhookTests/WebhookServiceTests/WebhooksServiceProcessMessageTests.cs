@@ -33,18 +33,6 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.WebhookServiceTests
         }
 
         [Fact]
-        public async Task WebhooksServiceProcessMessageAsyncThrowsUrlException()
-        {
-            // Arrange
-            var url = new Uri("https://somewhere.com/email}");
-            var service = BuildWebhooksService();
-
-            // Act
-            // Assert
-            await Assert.ThrowsAsync<InvalidDataException>(async () => await service.ProcessMessageAsync(WebhookCacheOperation.None, Guid.NewGuid(), Guid.NewGuid(), url).ConfigureAwait(false)).ConfigureAwait(false);
-        }
-
-        [Fact]
         public async Task WebhooksServiceProcessMessageAsyncContentCreateReturnsSuccess()
         {
             // Arrange
