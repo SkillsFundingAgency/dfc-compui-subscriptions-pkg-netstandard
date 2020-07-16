@@ -29,4 +29,4 @@ stages:
         BuildPlatform: $(BuildPlatform)
         BuildConfiguration: $(BuildConfiguration)
         DotNetCoreVersion: '3.1.100'
-        TestSuffix: 'Tests'
+        TestSuffix: 'UnitTests'
