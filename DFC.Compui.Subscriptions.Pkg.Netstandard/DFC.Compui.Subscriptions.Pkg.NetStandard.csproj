@@ -4,6 +4,7 @@
     <Nullable>enable</Nullable>
     <CodeAnalysisRuleSet>../DFC.Digital.CodeAnalysis.ruleset</CodeAnalysisRuleSet>
     <ProjectGuid>{E0E2508E-2B08-441D-BB5D-B059A97E475B}</ProjectGuid>
+    <AssemblyName>DFC.Compui.Subscriptions</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
