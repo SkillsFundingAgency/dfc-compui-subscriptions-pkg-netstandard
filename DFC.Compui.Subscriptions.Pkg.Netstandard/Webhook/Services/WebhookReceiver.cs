@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
@@ -84,6 +83,20 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
 
             return new OkResult();
         }
+        private static void ValidateData(Guid eventId, EventGridEventData eventGridEventData, out Guid contentId, out Uri url)
+        {
+            if (!Guid.TryParse(eventGridEventData.ItemId, out contentId))
+            {
+                throw new InvalidDataException($"Invalid Guid for EventGridEvent.Data.ItemId '{eventGridEventData.ItemId}'");
+            }
+
+            if (!Uri.TryCreate(eventGridEventData.Api, UriKind.Absolute, out var localUrl))
+            {
+                throw new InvalidDataException($"Invalid Api url '{eventGridEventData.Api}' received for Event Id: {eventId}");
+            }
+
+            url = localUrl ?? throw new InvalidDataException($"Invalid url '{localUrl}' received for Event Id: {eventId}");
+        }
 
         private void LogResult(Guid eventId, Guid contentPageId, HttpStatusCode result)
         {
@@ -105,21 +118,6 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
                     logger.LogWarning($"Event Id: {eventId}, Content Page Id: {contentPageId}: Content Page not Posted: Status: {result}");
                     break;
             }
-        }
-
-        private static void ValidateData(Guid eventId, EventGridEventData eventGridEventData, out Guid contentId, out Uri url)
-        {
-            if (!Guid.TryParse(eventGridEventData.ItemId, out contentId))
-            {
-                throw new InvalidDataException($"Invalid Guid for EventGridEvent.Data.ItemId '{eventGridEventData.ItemId}'");
-            }
-
-            if (!Uri.TryCreate(eventGridEventData.Api, UriKind.Absolute, out var localUrl))
-            {
-                throw new InvalidDataException($"Invalid Api url '{eventGridEventData.Api}' received for Event Id: {eventId}");
-            }
-
-            url = localUrl ?? throw new InvalidDataException($"Invalid url '{localUrl}' received for Event Id: {eventId}");
         }
     }
 }

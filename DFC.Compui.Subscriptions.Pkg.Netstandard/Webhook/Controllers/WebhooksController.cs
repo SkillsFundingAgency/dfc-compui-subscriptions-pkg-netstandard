@@ -1,14 +1,7 @@
 ﻿using DFC.Compui.Subscriptions.Pkg.Data.Contracts;
-using DFC.Compui.Subscriptions.Pkg.Data.Enums;
-using DFC.Compui.Subscriptions.Pkg.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.EventGrid;
-using Microsoft.Azure.EventGrid.Models;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
