@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace DFC.Compui.Subscriptions.Pkg.Data.Contracts
+namespace DFC.Compui.Subscriptions.Pkg.Data.Models
 {
     [ExcludeFromCodeCoverage]
     public class NoChildren : IContentItemModel, IDocumentModel

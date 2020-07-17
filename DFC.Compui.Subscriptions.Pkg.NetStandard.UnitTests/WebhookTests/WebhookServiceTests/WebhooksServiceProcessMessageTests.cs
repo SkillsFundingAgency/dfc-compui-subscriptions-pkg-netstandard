@@ -1,9 +1,8 @@
-﻿using DFC.Compui.Subscriptions.Pkg.Data.Contracts;
-using DFC.Compui.Subscriptions.Pkg.Data.Enums;
+﻿using DFC.Compui.Subscriptions.Pkg.Data.Enums;
+using DFC.Compui.Subscriptions.Pkg.Data.Models;
 using DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.TestModels;
 using FakeItEasy;
 using System;
-using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Xunit;
