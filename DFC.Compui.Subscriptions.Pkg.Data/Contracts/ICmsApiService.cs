@@ -10,8 +10,9 @@ namespace DFC.Compui.Subscriptions.Pkg.Data.Contracts
         Task<IList<TModel>?> GetSummaryAsync<TModel>()
             where TModel : class;
 
-        Task<TModel?> GetItemAsync<TModel>(Uri url)
-            where TModel : class, IContentItemModel;
+        Task<TModel?> GetItemAsync<TModel, TChildModel>(Uri url)
+            where TModel : class, IContentItemModel
+            where TChildModel : class?, IContentItemModel;
 
         Task<TModel?> GetContentItemAsync<TModel>(LinkDetails details)
             where TModel : class;

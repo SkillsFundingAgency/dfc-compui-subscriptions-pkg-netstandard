@@ -12,10 +12,11 @@ using System.Threading.Tasks;
 
 namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
 {
-    public class WebhooksService<TModel> : IWebhooksService
+    public class WebhooksService<TModel, TModelChild> : IWebhooksService
         where TModel : class, IContentItemModel, IDocumentModel
+        where TModelChild : class, IContentItemModel, IDocumentModel
     {
-        private readonly ILogger<WebhooksService<TModel>> logger;
+        private readonly ILogger<WebhooksService<TModel, TModelChild>> logger;
         private readonly AutoMapper.IMapper mapper;
         private readonly IEventMessageService<TModel> eventMessageService;
         private readonly ICmsApiService cmsApiService;
@@ -23,7 +24,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
         private readonly IContentCacheService contentCacheService;
 
         public WebhooksService(
-            ILogger<WebhooksService<TModel>> logger,
+            ILogger<WebhooksService<TModel, TModelChild>> logger,
             AutoMapper.IMapper mapper,
             IEventMessageService<TModel> eventMessageService,
             ICmsApiService cmsApiService,
@@ -72,7 +73,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
 
         public async Task<HttpStatusCode> ProcessContentAsync(Uri url, Guid contentId)
         {
-            var apiDataModel = await cmsApiService.GetItemAsync<TModel>(url).ConfigureAwait(false);
+            var apiDataModel = await cmsApiService.GetItemAsync<TModel, TModelChild>(url).ConfigureAwait(false);
             var contentModel = mapper.Map<TModel>(apiDataModel);
 
             if (contentModel == null)

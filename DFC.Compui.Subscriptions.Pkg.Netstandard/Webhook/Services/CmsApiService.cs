@@ -39,13 +39,22 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
                 .ConfigureAwait(false);
         }
 
-        public async Task<TModel?> GetItemAsync<TModel>(Uri url)
+        public async Task<TModel?> GetItemAsync<TModel, TModelChild>(Uri url)
              where TModel : class, IContentItemModel
+            where TModelChild : class, IContentItemModel
         {
             var pagesApiDataModel = await apiDataProcessorService.GetAsync<TModel>(httpClient, url)
                 .ConfigureAwait(false);
 
-            await GetSharedChildContentItems<TModel>(pagesApiDataModel.ContentLinks, pagesApiDataModel.ContentItems).ConfigureAwait(false);
+            if (typeof(TModelChild) != typeof(NoChildren))
+            {
+                if (pagesApiDataModel.ContentItems == null)
+                {
+                    pagesApiDataModel.ContentItems = new List<IContentItemModel>();
+                }
+
+                await GetSharedChildContentItems<TModelChild>(pagesApiDataModel.ContentLinks, pagesApiDataModel.ContentItems).ConfigureAwait(false);
+            }
 
             return pagesApiDataModel;
         }
@@ -69,6 +78,11 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
         {
             if (model != null && model.ContentLinks.Any())
             {
+                if (contentItem == null)
+                {
+                    contentItem = new List<IContentItemModel>();
+                }
+
                 foreach (var linkDetail in model.ContentLinks.SelectMany(contentLink => contentLink.Value))
                 {
                     var pagesApiContentItemModel =

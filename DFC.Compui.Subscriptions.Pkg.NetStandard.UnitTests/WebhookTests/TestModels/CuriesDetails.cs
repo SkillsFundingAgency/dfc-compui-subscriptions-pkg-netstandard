@@ -1,4 +1,4 @@
-﻿namespace DFC.Compui.Subscriptions.Pkg.Data.Models
+﻿namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.TestModels
 {
     public class CuriesDetails
     {

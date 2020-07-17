@@ -19,7 +19,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.WebhookServiceTests
 
         protected BaseWebhooksServiceTests()
         {
-            Logger = A.Fake<ILogger<WebhooksService<EmailModel>>>();
+            Logger = A.Fake<ILogger<WebhooksService<EmailModel, NoChildren>>>();
             FakeEmailEventMessageService = A.Fake<IEventMessageService<EmailModel>>();
             FakeMapper = A.Fake<AutoMapper.IMapper>();
             FakeCmsApiService = A.Fake<ICmsApiService>();
@@ -39,7 +39,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.WebhookServiceTests
 
         protected Guid ContentItemIdForDelete { get; } = Guid.NewGuid();
 
-        protected ILogger<WebhooksService<EmailModel>> Logger { get; }
+        protected ILogger<WebhooksService<EmailModel, NoChildren>> Logger { get; }
 
         protected IEventMessageService<EmailModel> FakeEmailEventMessageService { get; }
 
@@ -98,9 +98,9 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.WebhookServiceTests
             return model;
         }
 
-        protected WebhooksService<EmailModel> BuildWebhooksService()
+        protected WebhooksService<EmailModel, NoChildren> BuildWebhooksService()
         {
-            var service = new WebhooksService<EmailModel>(Logger, FakeMapper, FakeEmailEventMessageService, FakeCmsApiService, FakeDocumentService, FakeContentCacheService);
+            var service = new WebhooksService<EmailModel, NoChildren>(Logger, FakeMapper, FakeEmailEventMessageService, FakeCmsApiService, FakeDocumentService, FakeContentCacheService);
 
             return service;
         }

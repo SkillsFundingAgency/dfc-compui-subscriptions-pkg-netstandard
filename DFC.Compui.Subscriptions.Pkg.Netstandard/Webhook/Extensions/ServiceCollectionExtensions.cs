@@ -8,11 +8,21 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Extensions
 {
     public static class ServiceCollectionExtensions
     {
+        public static IServiceCollection AddWebhookSupport<TModel, TModelChild>(this IServiceCollection services)
+            where TModel : class, IDocumentModel, IContentItemModel
+            where TModelChild : class, IDocumentModel, IContentItemModel
+        {
+            services.AddTransient<IWebhookReceiver, WebhookReceiver>();
+            services.AddTransient<IWebhooksService, WebhooksService<TModel, TModelChild>>();
+
+            return services;
+        }
+
         public static IServiceCollection AddWebhookSupport<TModel>(this IServiceCollection services)
             where TModel : class, IDocumentModel, IContentItemModel
         {
             services.AddTransient<IWebhookReceiver, WebhookReceiver>();
-            services.AddTransient<IWebhooksService, WebhooksService<TModel>>();
+            _ = services.AddTransient<IWebhooksService, WebhooksService<TModel, NoChildren>>();
 
             return services;
         }
