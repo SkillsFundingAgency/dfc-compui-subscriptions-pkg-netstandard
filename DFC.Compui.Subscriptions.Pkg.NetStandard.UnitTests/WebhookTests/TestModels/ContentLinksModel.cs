@@ -63,7 +63,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.TestModels
 
             var contentCuriesDetails = GetContentCuriesDetails(jLinks);
 
-            if (contentCuriesDetails == null)
+            if (contentCuriesDetails == null || contentCuriesDetails.Name == null || contentCuriesDetails.Href == null)
             {
                 return contLink;
             }
