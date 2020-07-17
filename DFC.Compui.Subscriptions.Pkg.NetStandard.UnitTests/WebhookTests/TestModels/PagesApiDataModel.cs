@@ -49,7 +49,7 @@ namespace DFC.Compui.Subscriptions.Pkg.NetStandard.UnitTests.WebhookTests.TestMo
         [JsonIgnore]
         public IContentLinks? ContentLinks
         {
-            get => PrivateLinksModel ??= new ContentLinksModel(Links);
+            get => PrivateLinksModel ??= new ContentLinksModel(Links ?? new JObject());
 
             set => PrivateLinksModel = value;
         }

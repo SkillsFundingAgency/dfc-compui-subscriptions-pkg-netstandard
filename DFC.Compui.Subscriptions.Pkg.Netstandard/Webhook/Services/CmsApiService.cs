@@ -43,20 +43,25 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
              where TModel : class, IContentItemModel
              where TModelChild : class, IContentItemModel
         {
-            var pagesApiDataModel = await apiDataProcessorService.GetAsync<TModel>(httpClient, url)
+            var apiDataModel = await apiDataProcessorService.GetAsync<TModel>(httpClient, url)
                 .ConfigureAwait(false);
+
+            if (apiDataModel == null)
+            {
+                return apiDataModel;
+            }
 
             if (typeof(TModelChild) != typeof(NoChildren))
             {
-                if (pagesApiDataModel.ContentItems == null)
+                if (apiDataModel.ContentItems == null)
                 {
-                    pagesApiDataModel.ContentItems = new List<IContentItemModel>();
+                    apiDataModel.ContentItems = new List<IContentItemModel>();
                 }
 
-                await GetSharedChildContentItems<TModelChild>(pagesApiDataModel.ContentLinks, pagesApiDataModel.ContentItems).ConfigureAwait(false);
+                await GetSharedChildContentItems<TModelChild>(apiDataModel.ContentLinks, apiDataModel.ContentItems).ConfigureAwait(false);
             }
 
-            return pagesApiDataModel;
+            return apiDataModel;
         }
 
         public async Task<TModel?> GetContentItemAsync<TModel>(LinkDetails details)
@@ -85,14 +90,14 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
 
                 foreach (var linkDetail in model.ContentLinks.SelectMany(contentLink => contentLink.Value))
                 {
-                    var pagesApiContentItemModel =
+                    var apiDataModelContentItems =
                         await GetContentItemAsync<TModel>(linkDetail).ConfigureAwait(false);
 
-                    if (pagesApiContentItemModel != null)
+                    if (apiDataModelContentItems != null)
                     {
-                        mapper.Map(linkDetail, pagesApiContentItemModel);
-                        await GetSharedChildContentItems<TModel>(pagesApiContentItemModel.ContentLinks, pagesApiContentItemModel.ContentItems!).ConfigureAwait(false);
-                        contentItem.Add(pagesApiContentItemModel);
+                        mapper.Map(linkDetail, apiDataModelContentItems);
+                        await GetSharedChildContentItems<TModel>(apiDataModelContentItems.ContentLinks, apiDataModelContentItems.ContentItems!).ConfigureAwait(false);
+                        contentItem.Add(apiDataModelContentItems);
                     }
                 }
             }
