@@ -24,7 +24,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Extensions
             where TModel : class, IDocumentModel, IContentItemModel
         {
             services.AddTransient<IWebhookReceiver, WebhookReceiver>();
-            _ = services.AddTransient<IWebhooksService, WebhooksService<TModel, NoChildren>>();
+            services.AddTransient<IWebhooksService, WebhooksService<TModel, NoChildren>>();
 
             return services;
         }
