@@ -1,13 +1,14 @@
 ﻿using DFC.Compui.Subscriptions.Pkg.Data.Enums;
+using DFC.Compui.Subscriptions.Pkg.Data.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DFC.Compui.Subscriptions.Pkg.Data.Models
+namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.TestModels
 {
-    public class ContentLinksModel
+    public class ContentLinksModel : IContentLinks
     {
         private readonly JObject jLinks;
 
@@ -62,7 +63,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Data.Models
 
             var contentCuriesDetails = GetContentCuriesDetails(jLinks);
 
-            if (contentCuriesDetails == null)
+            if (contentCuriesDetails == null || contentCuriesDetails.Name == null || contentCuriesDetails.Href == null)
             {
                 return contLink;
             }

@@ -1,4 +1,5 @@
-﻿using DFC.Compui.Subscriptions.Pkg.Data.Enums;
+﻿using DFC.Compui.Subscriptions.Pkg.Data.Contracts;
+using DFC.Compui.Subscriptions.Pkg.Data.Enums;
 using DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.TestModels;
 using FakeItEasy;
 using System;
@@ -37,7 +38,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.WebhookServiceTests
         {
             // Arrange
 
-            A.CallTo(() => FakeCmsApiService.GetItemAsync<EmailModel>(A<Uri>.Ignored)).Returns(new EmailModel() { Body = "ATestBody", Id = Guid.NewGuid() });
+            A.CallTo(() => FakeCmsApiService.GetItemAsync<EmailModel, NoChildren>(A<Uri>.Ignored)).Returns(new EmailModel() { Body = "ATestBody", Id = Guid.NewGuid() });
             A.CallTo(() => FakeEmailEventMessageService.UpdateAsync(A<EmailModel>.Ignored)).Returns(HttpStatusCode.Created);
 
             const HttpStatusCode expectedResponse = HttpStatusCode.Created;
@@ -55,7 +56,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.WebhookServiceTests
         public async Task WebhooksServiceProcessMessageAsyncContentCreateReturnsOk()
         {
             // Arrange
-            A.CallTo(() => FakeCmsApiService.GetItemAsync<EmailModel>(A<Uri>.Ignored)).Returns(new EmailModel() { Body = "ATestBody", Id = Guid.NewGuid() });
+            A.CallTo(() => FakeCmsApiService.GetItemAsync<EmailModel, NoChildren>(A<Uri>.Ignored)).Returns(new EmailModel() { Body = "ATestBody", Id = Guid.NewGuid() });
             A.CallTo(() => FakeEmailEventMessageService.UpdateAsync(A<EmailModel>.Ignored)).Returns(HttpStatusCode.OK);
 
             const HttpStatusCode expectedResponse = HttpStatusCode.OK;
@@ -73,7 +74,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests.WebhookServiceTests
         public async Task WebhooksServiceProcessMessageAsyncContentDeleteSharedContentReturnsNotFound()
         {
             // Arrange
-            A.CallTo(() => FakeCmsApiService.GetItemAsync<EmailModel>(A<Uri>.Ignored)).Returns(new EmailModel() { Body = "ATestBody", Id = Guid.NewGuid() });
+            A.CallTo(() => FakeCmsApiService.GetItemAsync<EmailModel, NoChildren>(A<Uri>.Ignored)).Returns(new EmailModel() { Body = "ATestBody", Id = Guid.NewGuid() });
             A.CallTo(() => FakeEmailEventMessageService.DeleteAsync(A<Guid>.Ignored)).Returns(HttpStatusCode.NotFound);
 
             const HttpStatusCode expectedResponse = HttpStatusCode.NotFound;
