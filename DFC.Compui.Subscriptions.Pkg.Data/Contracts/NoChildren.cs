@@ -2,9 +2,11 @@
 using DFC.Compui.Subscriptions.Pkg.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DFC.Compui.Subscriptions.Pkg.Data.Contracts
 {
+    [ExcludeFromCodeCoverage]
     public class NoChildren : IContentItemModel, IDocumentModel
     {
         public Guid? ItemId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
