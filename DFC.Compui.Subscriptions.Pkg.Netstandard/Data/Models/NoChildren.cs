@@ -1,5 +1,4 @@
 ﻿using DFC.Compui.Cosmos.Contracts;
-using DFC.Compui.Subscriptions.Pkg.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;

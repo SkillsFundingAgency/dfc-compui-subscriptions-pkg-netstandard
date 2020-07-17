@@ -12,7 +12,8 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
     public class EventMessageService<TModel> : IEventMessageService<TModel>
            where TModel : class, IDocumentModel
     {
-        private readonly ILogger<EventMessageService<TModel>> logger;
+        private readonly ILogger<EventMessageService<TModel>> 
+            logger;
         private readonly IDocumentService<TModel> contentPageService;
 
         public EventMessageService(ILogger<EventMessageService<TModel>> logger, IDocumentService<TModel> contentPageService)
