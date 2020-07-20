@@ -14,32 +14,28 @@ namespace DFC.Compui.Subscriptions.Pkg.NetStandard.Webhook.Services
     public class SubscriptionRegistrationService : ISubscriptionRegistrationService
     {
         private readonly IOptionsMonitor<SubscriptionSettings> settings;
-        private readonly IConfiguration configuration;
         private readonly HttpClient httpClient;
         private readonly ILogger<SubscriptionRegistrationService> logger;
 
-        public SubscriptionRegistrationService(IOptionsMonitor<SubscriptionSettings> settings, IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<SubscriptionRegistrationService> logger)
+        public SubscriptionRegistrationService(IOptionsMonitor<SubscriptionSettings> settings, IHttpClientFactory httpClientFactory, ILogger<SubscriptionRegistrationService> logger)
         {
             this.settings = settings;
-            this.configuration = configuration;
             this.logger = logger;
             this.httpClient = httpClientFactory.CreateClient();
         }
 
-        public async Task RegisterSubscription()
+        public async Task RegisterSubscription(string subscriptionName)
         {
             logger.LogInformation("Subscription registration started");
 
             this.ValidateSubscriptionSettings(this.settings.CurrentValue);
-
-            var subscribeName = !string.IsNullOrEmpty(configuration["Configuration:ApplicationName"]) ? configuration["Configuration:ApplicationName"] : throw new ArgumentException("Configuration:ApplicationName not present in IConfiguration");
-
+            
             var webhookReceiverUrl = $"{settings.CurrentValue.Endpoint ?? throw new ArgumentException(nameof(settings.CurrentValue.Endpoint))}";
 
             logger.LogInformation($"Registering subscription for endpoint: {webhookReceiverUrl}");
 
             var subscriptionRequest = settings.CurrentValue;
-            subscriptionRequest.Name = subscribeName;
+            subscriptionRequest.Name = subscriptionName;
 
             var content = new StringContent(JsonConvert.SerializeObject(subscriptionRequest), Encoding.UTF8, "application/json");
 
