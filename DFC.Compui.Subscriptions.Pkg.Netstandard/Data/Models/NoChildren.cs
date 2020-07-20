@@ -8,11 +8,16 @@ namespace DFC.Compui.Subscriptions.Pkg.Data.Models
     [ExcludeFromCodeCoverage]
     public class NoChildren : IContentItemModel, IDocumentModel
     {
-        public Guid? ItemId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IContentLinks? ContentLinks { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IList<IContentItemModel>? ContentItems { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Guid Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string? Etag { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string? PartitionKey { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Guid? ItemId { get; set; }
+
+        public IContentLinks? ContentLinks { get; set; }
+
+        public IList<IContentItemModel>? ContentItems { get; set; }
+
+        public Guid Id { get; set; }
+
+        public string? Etag { get; set; }
+
+        public string? PartitionKey { get; set; }
     }
 }
