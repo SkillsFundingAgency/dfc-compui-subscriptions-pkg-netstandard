@@ -43,6 +43,11 @@ namespace DFC.Compui.Subscriptions.Pkg.NetStandard.Webhook.Services
 
             var content = new StringContent(JsonConvert.SerializeObject(subscriptionRequest), Encoding.UTF8, "application/json");
 
+            if (!string.IsNullOrEmpty(this.settings.CurrentValue.ApiKey))
+            {
+                httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", this.settings.CurrentValue.ApiKey);
+            }
+
             var result = await httpClient.PostAsync(settings.CurrentValue.SubscriptionServiceEndpoint, content).ConfigureAwait(false);
 
             if (!result.IsSuccessStatusCode)
