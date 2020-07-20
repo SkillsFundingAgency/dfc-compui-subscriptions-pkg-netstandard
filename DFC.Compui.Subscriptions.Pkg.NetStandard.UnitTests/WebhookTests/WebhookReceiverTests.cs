@@ -41,7 +41,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests
         public async Task WebhooksControllerPublishCreatePostReturnsOkForCreate(string mediaTypeName, string eventType)
         {
             // Arrange
-            const HttpStatusCode expectedResponse = HttpStatusCode.OK;
+            const HttpStatusCode expectedResponse = HttpStatusCode.Created;
             var eventGridEvents = BuildValidEventGridEvent(eventType, new EventGridEventData { ItemId = ItemIdForCreate.ToString(), Api = "https://somewhere.com", });
             var service = BuildWebhookService(mediaTypeName);
             var eventContent = await BuildStringContentFromModel(eventGridEvents);
@@ -53,7 +53,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests
 
             // Assert
             A.CallTo(() => FakeWebhooksService.ProcessMessageAsync(A<WebhookCacheOperation>.Ignored, A<Guid>.Ignored, A<Guid>.Ignored, A<Uri>.Ignored)).MustHaveHappenedOnceExactly();
-            var okResult = Assert.IsType<OkResult>(result);
+            var okResult = Assert.IsType<StatusCodeResult>(result);
 
             Assert.Equal((int)expectedResponse, okResult.StatusCode);
         }
@@ -75,7 +75,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests
 
             // Assert
             A.CallTo(() => FakeWebhooksService.ProcessMessageAsync(A<WebhookCacheOperation>.Ignored, A<Guid>.Ignored, A<Guid>.Ignored, A<Uri>.Ignored)).MustHaveHappenedOnceExactly();
-            var okResult = Assert.IsType<OkResult>(result);
+            var okResult = Assert.IsType<StatusCodeResult>(result);
 
             Assert.Equal((int)expectedResponse, okResult.StatusCode);
         }
@@ -97,17 +97,17 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests
 
             // Assert
             A.CallTo(() => FakeWebhooksService.ProcessMessageAsync(A<WebhookCacheOperation>.Ignored, A<Guid>.Ignored, A<Guid>.Ignored, A<Uri>.Ignored)).MustHaveHappenedOnceExactly();
-            var okResult = Assert.IsType<OkResult>(result);
+            var okResult = Assert.IsType<StatusCodeResult>(result);
 
             Assert.Equal((int)expectedResponse, okResult.StatusCode);
         }
 
         [Theory]
         [MemberData(nameof(PublishedEvents))]
-        public async Task WebhooksControllerPublishCreatePostReturnsOkForAlreadyReported(string mediaTypeName, string eventType)
+        public async Task WebhooksControllerPublishCreatePostReturnsAlreadyReportedForAlreadyReported(string mediaTypeName, string eventType)
         {
             // Arrange
-            const HttpStatusCode expectedResponse = HttpStatusCode.OK;
+            const HttpStatusCode expectedResponse = HttpStatusCode.AlreadyReported;
             var eventGridEvents = BuildValidEventGridEvent(eventType, new EventGridEventData { ItemId = ItemIdForCreate.ToString(), Api = "https://somewhere.com", });
             var controller = BuildWebhookService(mediaTypeName);
             var eventContent = await BuildStringContentFromModel(eventGridEvents);
@@ -119,7 +119,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests
 
             // Assert
             A.CallTo(() => FakeWebhooksService.ProcessMessageAsync(A<WebhookCacheOperation>.Ignored, A<Guid>.Ignored, A<Guid>.Ignored, A<Uri>.Ignored)).MustHaveHappenedOnceExactly();
-            var okResult = Assert.IsType<OkResult>(result);
+            var okResult = Assert.IsType<StatusCodeResult>(result);
 
             Assert.Equal((int)expectedResponse, okResult.StatusCode);
         }
@@ -129,7 +129,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests
         public async Task WebhooksControllerPublishCreatePostReturnsOkForConflict(string mediaTypeName, string eventType)
         {
             // Arrange
-            const HttpStatusCode expectedResponse = HttpStatusCode.OK;
+            const HttpStatusCode expectedResponse = HttpStatusCode.Conflict;
             var eventGridEvents = BuildValidEventGridEvent(eventType, new EventGridEventData { ItemId = ItemIdForCreate.ToString(), Api = "https://somewhere.com", });
             var controller = BuildWebhookService(mediaTypeName);
             var eventContent = await BuildStringContentFromModel(eventGridEvents);
@@ -141,7 +141,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.UnitTests
 
             // Assert
             A.CallTo(() => FakeWebhooksService.ProcessMessageAsync(A<WebhookCacheOperation>.Ignored, A<Guid>.Ignored, A<Guid>.Ignored, A<Uri>.Ignored)).MustHaveHappenedOnceExactly();
-            var okResult = Assert.IsType<OkResult>(result);
+            var okResult = Assert.IsType<StatusCodeResult>(result);
 
             Assert.Equal((int)expectedResponse, okResult.StatusCode);
         }
