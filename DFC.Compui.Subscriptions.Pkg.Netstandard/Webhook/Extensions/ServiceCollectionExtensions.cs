@@ -10,7 +10,27 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Extensions
     [ExcludeFromCodeCoverage]
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddWebhookSupport<TModel, TModelChild>(this IServiceCollection services)
+        /// <summary>
+        /// Add webhook support with a custom implementation for IWebhookService.
+        /// </summary>
+        /// <typeparam name="TWebhookService">The custom webhook service.</typeparam>
+        /// <param name="services">The services collection.</param>
+        /// <returns>The <see cref="IServiceCollection"/>. </returns>
+        public static IServiceCollection AddWebhookSupport<TWebhookService>(this IServiceCollection services)
+            where TWebhookService : class, IWebhooksService
+        {
+            services.AddTransient<IWebhookReceiver, WebhookReceiver>();
+            services.AddTransient<IWebhooksService, TWebhookService>();
+
+            return services;
+        }
+
+        /// <summary>
+        /// Add webhook support with the default implementation of IWebhookService for a model with children.
+        /// </summary>
+        /// <param name="services">The services collection.</param>
+        /// <returns>The <see cref="IServiceCollection"/>. </returns>
+        public static IServiceCollection AddWebhookSupportWithChildren<TModel, TModelChild>(this IServiceCollection services)
             where TModel : class, IDocumentModel, IContentItemModel
             where TModelChild : class, IDocumentModel, IContentItemModel
         {
@@ -20,7 +40,12 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Extensions
             return services;
         }
 
-        public static IServiceCollection AddWebhookSupport<TModel>(this IServiceCollection services)
+        /// <summary>
+        /// Add webhook support with the default implementation of IWebhookService for a model without children.
+        /// </summary>
+        /// <param name="services">The services collection.</param>
+        /// <returns>The <see cref="IServiceCollection"/>. </returns>
+        public static IServiceCollection AddWebhookSupportNoChildren<TModel>(this IServiceCollection services)
             where TModel : class, IDocumentModel, IContentItemModel
         {
             services.AddTransient<IWebhookReceiver, WebhookReceiver>();
