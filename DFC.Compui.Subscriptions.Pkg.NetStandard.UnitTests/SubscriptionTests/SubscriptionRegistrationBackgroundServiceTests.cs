@@ -1,7 +1,7 @@
 using DFC.App.Subscription;
 using DFC.Compui.Subscriptions.Pkg.Data;
 using DFC.Compui.Subscriptions.Pkg.Netstandard.UnitTests.Utilities;
-using DFC.Compui.Subscriptions.Pkg.NetStandard.Webhook.Services;
+using DFC.Compui.Subscriptions.Pkg.NetStandard.Subscription.Services;
 using FakeItEasy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
