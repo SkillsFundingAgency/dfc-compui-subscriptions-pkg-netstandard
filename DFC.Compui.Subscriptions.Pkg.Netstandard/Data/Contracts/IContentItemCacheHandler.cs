@@ -5,6 +5,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Data.Contracts
 {
     public interface IContentItemCacheHandler
     {
-        Task ProcessAsync<TModel>(IContentCacheService contentCacheService, TModel contentPageModel) where TModel : IDocumentModel;
+        Task ProcessAsync<TModel>(IContentCacheService contentCacheService, TModel contentPageModel) 
+            where TModel : IDocumentModel;
     }
 }

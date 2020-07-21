@@ -1,4 +1,3 @@
-using DFC.App.Subscription;
 using DFC.Compui.Subscriptions.Pkg.Data;
 using DFC.Compui.Subscriptions.Pkg.Netstandard.UnitTests.Utilities;
 using DFC.Compui.Subscriptions.Pkg.NetStandard.Subscription.Services;
@@ -9,7 +8,6 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 

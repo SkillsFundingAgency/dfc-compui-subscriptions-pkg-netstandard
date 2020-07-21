@@ -1,6 +1,5 @@
 ﻿using DFC.Compui.Subscriptions.Pkg.Data;
 using DFC.Compui.Subscriptions.Pkg.NetStandard.Data.Contracts;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
