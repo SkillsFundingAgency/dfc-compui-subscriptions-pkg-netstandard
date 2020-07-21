@@ -74,6 +74,8 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Services
                     var result = await webhookService.ProcessMessageAsync(cacheOperation, eventId, contentId, url).ConfigureAwait(false);
 
                     LogResult(eventId, contentId, result);
+
+                    return new StatusCodeResult((int)result);
                 }
                 else
                 {

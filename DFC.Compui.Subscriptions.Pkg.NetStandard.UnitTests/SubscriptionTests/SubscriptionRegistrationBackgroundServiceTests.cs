@@ -1,6 +1,6 @@
-using DFC.App.Subscription;
 using DFC.Compui.Subscriptions.Pkg.Data;
 using DFC.Compui.Subscriptions.Pkg.Netstandard.UnitTests.Utilities;
+using DFC.Compui.Subscriptions.Pkg.NetStandard.Subscription.Services;
 using FakeItEasy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -18,7 +17,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Netstandard.UnitTests
     {
         private readonly IConfiguration configuration = A.Fake<IConfiguration>();
         private readonly IHttpClientFactory httpClientFactory = A.Fake<IHttpClientFactory>();
-        private readonly ILogger<SubscriptionRegistrationBackgroundService> logger = A.Fake<ILogger<SubscriptionRegistrationBackgroundService>>();
+        private readonly ILogger<SubscriptionRegistrationService> logger = A.Fake<ILogger<SubscriptionRegistrationService>>();
         private readonly IOptionsMonitor<SubscriptionSettings> settings = A.Fake<IOptionsMonitor<SubscriptionSettings>>();
 
         public SubscriptionRegistrationBackgroundServiceTests()
@@ -29,13 +28,11 @@ namespace DFC.Compui.Subscriptions.Pkg.Netstandard.UnitTests
         public async Task SubscriptionRegistrationBackgroundServiceNoApplicationNameSettingThrowsException()
         {
             //Arrange
-            var serviceToTest = new SubscriptionRegistrationBackgroundService(settings, configuration, httpClientFactory, logger);
+            var serviceToTest = new SubscriptionRegistrationService(settings, httpClientFactory, logger);
 
             //Act
             //Assert
-            await Assert.ThrowsAsync<ArgumentException>(async () => await serviceToTest.StartAsync(CancellationToken.None).ConfigureAwait(false)).ConfigureAwait(false);
-
-            serviceToTest.Dispose();
+            await Assert.ThrowsAsync<ArgumentException>(async () => await serviceToTest.RegisterSubscription("a-test-subscriber").ConfigureAwait(false)).ConfigureAwait(false);
         }
 
         [Fact]
@@ -43,13 +40,11 @@ namespace DFC.Compui.Subscriptions.Pkg.Netstandard.UnitTests
         {
             //Arrange
             A.CallTo(() => configuration["Configuration:ApplicationName"]).Returns("test-app");
-            var serviceToTest = new SubscriptionRegistrationBackgroundService(settings, configuration, httpClientFactory, logger);
+            var serviceToTest = new SubscriptionRegistrationService(settings, httpClientFactory, logger);
 
             //Act
             //Assert
-            await Assert.ThrowsAsync<ArgumentException>(async () => await serviceToTest.StartAsync(CancellationToken.None).ConfigureAwait(false)).ConfigureAwait(false);
-
-            serviceToTest.Dispose();
+            await Assert.ThrowsAsync<ArgumentException>(async () => await serviceToTest.RegisterSubscription("a-test-subscriber").ConfigureAwait(false)).ConfigureAwait(false);
         }
 
         [Fact]
@@ -67,15 +62,14 @@ namespace DFC.Compui.Subscriptions.Pkg.Netstandard.UnitTests
             A.CallTo(() => fakeHttpRequestSender.Send(A<HttpRequestMessage>.Ignored)).Returns(httpResponse);
             A.CallTo(() => httpClientFactory.CreateClient(A<string>.Ignored)).Returns(httpClient);
 
-            var serviceToTest = new SubscriptionRegistrationBackgroundService(settings, configuration, httpClientFactory, logger);
+            var serviceToTest = new SubscriptionRegistrationService(settings, httpClientFactory, logger);
 
             //Act
-            await serviceToTest.StartAsync(CancellationToken.None).ConfigureAwait(false);
+            await serviceToTest.RegisterSubscription("a-test-subscriber").ConfigureAwait(false);
 
             //Assert
             A.CallTo(() => fakeHttpRequestSender.Send(A<HttpRequestMessage>.Ignored)).MustHaveHappenedOnceExactly();
 
-            serviceToTest.Dispose();
             httpResponse.Dispose();
             fakeHttpMessageHandler.Dispose();
             httpClient.Dispose();
@@ -96,14 +90,13 @@ namespace DFC.Compui.Subscriptions.Pkg.Netstandard.UnitTests
             A.CallTo(() => fakeHttpRequestSender.Send(A<HttpRequestMessage>.Ignored)).Returns(httpResponse);
             A.CallTo(() => httpClientFactory.CreateClient(A<string>.Ignored)).Returns(httpClient);
 
-            var serviceToTest = new SubscriptionRegistrationBackgroundService(settings, configuration, httpClientFactory, logger);
+            var serviceToTest = new SubscriptionRegistrationService(settings, httpClientFactory, logger);
 
             //Act
             //Assert
-            await Assert.ThrowsAsync<HttpRequestException>(async () => await serviceToTest.StartAsync(CancellationToken.None).ConfigureAwait(false)).ConfigureAwait(false);
+            await Assert.ThrowsAsync<HttpRequestException>(async () => await serviceToTest.RegisterSubscription("a-test-subscriber").ConfigureAwait(false)).ConfigureAwait(false);
             A.CallTo(() => fakeHttpRequestSender.Send(A<HttpRequestMessage>.Ignored)).MustHaveHappenedOnceExactly();
 
-            serviceToTest.Dispose();
             httpResponse.Dispose();
             fakeHttpMessageHandler.Dispose();
             httpClient.Dispose();

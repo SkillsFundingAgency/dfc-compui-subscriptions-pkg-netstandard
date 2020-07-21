@@ -2,6 +2,6 @@
 {
     public class CmsApiClientOptions : ClientOptionsModel
     {
-        public string SummaryEndpoint { get; set; }
+        public string? SummaryEndpoint { get; set; }
     }
 }

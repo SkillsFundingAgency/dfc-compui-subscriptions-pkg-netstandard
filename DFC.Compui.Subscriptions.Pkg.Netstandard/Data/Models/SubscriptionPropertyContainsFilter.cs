@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DFC.Compui.Subscriptions.Pkg.Data
+﻿namespace DFC.Compui.Subscriptions.Pkg.Data
 {
     public class SubscriptionPropertyContainsFilter
     {

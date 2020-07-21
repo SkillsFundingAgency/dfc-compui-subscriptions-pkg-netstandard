@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DFC.Compui.Subscriptions.Pkg.Data.Models
 {
-    public interface IContentItems
+    public interface IContentItemModel
     {
+        Guid? ItemId { get; set; }
+
+        IContentLinks? ContentLinks { get; set; }
+
         IList<IContentItemModel>? ContentItems { get; set; }
+
     }
 }

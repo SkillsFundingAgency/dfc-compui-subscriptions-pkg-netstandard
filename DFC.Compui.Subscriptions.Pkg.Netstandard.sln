@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DFC.Compui.Subscriptions.Pkg.Data", "DFC.Compui.Subscriptions.Pkg.Data\DFC.Compui.Subscriptions.Pkg.Data.csproj", "{2BBC5D4D-65C3-4036-9ABE-951DA9E36B3D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73A840DE-F90A-4E2A-8431-A6E7CD187443}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
@@ -30,18 +28,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2BBC5D4D-65C3-4036-9ABE-951DA9E36B3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BBC5D4D-65C3-4036-9ABE-951DA9E36B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BBC5D4D-65C3-4036-9ABE-951DA9E36B3D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{2BBC5D4D-65C3-4036-9ABE-951DA9E36B3D}.Debug|x64.Build.0 = Debug|Any CPU
-		{2BBC5D4D-65C3-4036-9ABE-951DA9E36B3D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2BBC5D4D-65C3-4036-9ABE-951DA9E36B3D}.Debug|x86.Build.0 = Debug|Any CPU
-		{2BBC5D4D-65C3-4036-9ABE-951DA9E36B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BBC5D4D-65C3-4036-9ABE-951DA9E36B3D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2BBC5D4D-65C3-4036-9ABE-951DA9E36B3D}.Release|x64.ActiveCfg = Release|Any CPU
-		{2BBC5D4D-65C3-4036-9ABE-951DA9E36B3D}.Release|x64.Build.0 = Release|Any CPU
-		{2BBC5D4D-65C3-4036-9ABE-951DA9E36B3D}.Release|x86.ActiveCfg = Release|Any CPU
-		{2BBC5D4D-65C3-4036-9ABE-951DA9E36B3D}.Release|x86.Build.0 = Release|Any CPU
 		{E0E2508E-2B08-441D-BB5D-B059A97E475B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E0E2508E-2B08-441D-BB5D-B059A97E475B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0E2508E-2B08-441D-BB5D-B059A97E475B}.Debug|x64.ActiveCfg = Debug|Any CPU
