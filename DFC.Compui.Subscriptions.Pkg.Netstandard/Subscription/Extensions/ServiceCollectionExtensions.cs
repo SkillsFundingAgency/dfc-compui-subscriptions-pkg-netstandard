@@ -1,7 +1,7 @@
 ﻿using DFC.App.Subscription;
 using DFC.Compui.Subscriptions.Pkg.Data;
 using DFC.Compui.Subscriptions.Pkg.NetStandard.Data.Contracts;
-using DFC.Compui.Subscriptions.Pkg.NetStandard.Webhook.Services;
+using DFC.Compui.Subscriptions.Pkg.NetStandard.Subscription.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;

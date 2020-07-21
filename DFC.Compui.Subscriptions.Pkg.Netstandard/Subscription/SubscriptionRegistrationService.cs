@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DFC.Compui.Subscriptions.Pkg.NetStandard.Webhook.Services
+namespace DFC.Compui.Subscriptions.Pkg.NetStandard.Subscription.Services
 {
     public class SubscriptionRegistrationService : ISubscriptionRegistrationService
     {
