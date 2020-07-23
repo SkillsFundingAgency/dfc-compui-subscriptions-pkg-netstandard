@@ -62,6 +62,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Extensions
         {
             services.AddTransient<IEventMessageService<TModel>, EventMessageService<TModel>>();
             services.AddTransient<IApiService, ApiService>();
+            services.AddTransient<ICmsApiService, CmsApiService>();
             services.AddTransient<IApiDataProcessorService, ApiDataProcessorService>();
             services.AddTransient<IEventMessageService<TModel>, EventMessageService<TModel>>();
 
