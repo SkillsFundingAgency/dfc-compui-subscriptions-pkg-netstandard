@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/SkillsFundingAgency/dfc-compui-subscriptions-pkg-netstandard</RepositoryUrl>
     <PackageTags>CompUI, Subscriptions</PackageTags>
     <Description>
-      Subscriptions repository - handles initial data load from Content API and also receiving webhook events to update local application cache
+      Subscriptions repository - handles subscription registration and also receipt of webhook events to update local application cache
       For details on how to use this package see the ReadMe file that is part of this repository.
     </Description>
   </PropertyGroup>
