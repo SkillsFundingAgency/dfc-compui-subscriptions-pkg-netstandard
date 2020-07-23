@@ -35,7 +35,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Extensions
             where TModel : class, IDocumentModel, IContentItemModel
             where TModelChild : class, IDocumentModel, IContentItemModel
         {
-            AddBaseService<TModel>(services);
+            AddBaseServices<TModel>(services);
             services.AddTransient<IWebhookReceiver, WebhookReceiver>();
             services.AddTransient<IWebhooksService, WebhooksService<TModel, TModelChild>>();
 
@@ -50,14 +50,14 @@ namespace DFC.Compui.Subscriptions.Pkg.Webhook.Extensions
         public static IServiceCollection AddWebhookSupportNoChildren<TModel>(this IServiceCollection services)
             where TModel : class, IDocumentModel, IContentItemModel
         {
-            AddBaseService<TModel>(services);
+            AddBaseServices<TModel>(services);
             services.AddTransient<IWebhookReceiver, WebhookReceiver>();
             services.AddTransient<IWebhooksService, WebhooksService<TModel, NoChildren>>();
 
             return services;
         }
 
-        private static IServiceCollection AddBaseService<TModel>(this IServiceCollection services)
+        private static IServiceCollection AddBaseServices<TModel>(this IServiceCollection services)
              where TModel : class, IDocumentModel, IContentItemModel
         {
             services.AddTransient<IEventMessageService<TModel>, EventMessageService<TModel>>();
