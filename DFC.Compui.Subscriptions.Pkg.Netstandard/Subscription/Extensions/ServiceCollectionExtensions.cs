@@ -18,6 +18,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Netstandard.Extensions
             _ = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
             services.Configure<SubscriptionSettings>(configuration.GetSection(nameof(SubscriptionSettings)) ?? throw new ArgumentException($"{nameof(SubscriptionSettings)} not present in AppSettings"));
+            services.AddTransient<ISubscriptionRegistrationService, SubscriptionRegistrationService>();
             services.AddHostedService<SubscriptionRegistrationBackgroundService>();
             return services;
         }
