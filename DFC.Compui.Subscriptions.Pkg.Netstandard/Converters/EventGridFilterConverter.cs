@@ -10,7 +10,10 @@ namespace DFC.Compui.Subscriptions.Pkg.NetStandard.Converters
     {
         public static AdvancedFilter Convert(this ApiAdvancedFilter advancedFilter)
         {
-            _ = advancedFilter ?? throw new ArgumentNullException(nameof(advancedFilter));
+            if (advancedFilter == null)
+            {
+                throw new ArgumentNullException(nameof(advancedFilter));
+            }
 
             return advancedFilter.Type switch
             {
