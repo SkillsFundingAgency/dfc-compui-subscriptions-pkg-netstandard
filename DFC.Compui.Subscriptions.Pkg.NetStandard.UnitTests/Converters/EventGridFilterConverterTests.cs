@@ -26,18 +26,18 @@ namespace DFC.Compui.Subscriptions.Pkg.NetStandard.UnitTests.Converters
         {
             var allData = new List<object[]>
         {
-            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterTypeEnum.BoolEquals, Property = "Subject", Values = new List<object> { "true" }  }, nameof(BoolEqualsAdvancedFilter) },
-            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterTypeEnum.NumberGreaterThanOrEquals, Property = "Subject", Values = new List<object> { 2 } }, nameof(NumberGreaterThanAdvancedFilter) },
-            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterTypeEnum.NumberIn, Property = "Subject", Values = new List<object> { 3,4,5 } }, nameof(NumberInAdvancedFilter) },
-            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterTypeEnum.NumberLessThan, Property = "Subject", Values = new List<object> { 5 } }, nameof(NumberLessThanAdvancedFilter) },
-            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterTypeEnum.NumberLessThanOrEquals, Property = "Subject", Values = new List<object> { 6 } },  nameof(NumberLessThanOrEqualsAdvancedFilter) },
-            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterTypeEnum.NumberNotIn, Property = "Subject", Values = new List<object>{ 7,8,9 }  }, nameof(NumberNotInAdvancedFilter) },
-            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterTypeEnum.StringBeginsWith, Property = "Subject", Values = new List<object> { "test" } }, nameof(StringBeginsWithAdvancedFilter) },
-            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterTypeEnum.StringContains, Property = "Subject", Values = new List<object> { "a", "test", "word" } }, nameof(StringContainsAdvancedFilter) },
-            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterTypeEnum.StringEndsWith, Property = "Subject", Values = new List<object> { "a", "test", "end" } }, nameof(StringEndsWithAdvancedFilter) },
-            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterTypeEnum.StringIn, Property = "Subject", Values = new List<object> { "a", "test", "in" } }, nameof(StringInAdvancedFilter) },
-            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterTypeEnum.StringNotIn, Property = "Subject", Values = new List<object> { "a", "test", "notin" } }, nameof(StringNotInAdvancedFilter) },
-            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterTypeEnum.NumberGreaterThan, Property = "Subject", Values = new List<object> { 5 } }, nameof(NumberGreaterThanAdvancedFilter) }
+            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterType.BoolEquals, Property = "Subject", Values = new List<object> { "true" }  }, nameof(BoolEqualsAdvancedFilter) },
+            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterType.NumberGreaterThanOrEquals, Property = "Subject", Values = new List<object> { 2 } }, nameof(NumberGreaterThanAdvancedFilter) },
+            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterType.NumberIn, Property = "Subject", Values = new List<object> { 3,4,5 } }, nameof(NumberInAdvancedFilter) },
+            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterType.NumberLessThan, Property = "Subject", Values = new List<object> { 5 } }, nameof(NumberLessThanAdvancedFilter) },
+            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterType.NumberLessThanOrEquals, Property = "Subject", Values = new List<object> { 6 } },  nameof(NumberLessThanOrEqualsAdvancedFilter) },
+            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterType.NumberNotIn, Property = "Subject", Values = new List<object>{ 7,8,9 }  }, nameof(NumberNotInAdvancedFilter) },
+            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterType.StringBeginsWith, Property = "Subject", Values = new List<object> { "test" } }, nameof(StringBeginsWithAdvancedFilter) },
+            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterType.StringContains, Property = "Subject", Values = new List<object> { "a", "test", "word" } }, nameof(StringContainsAdvancedFilter) },
+            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterType.StringEndsWith, Property = "Subject", Values = new List<object> { "a", "test", "end" } }, nameof(StringEndsWithAdvancedFilter) },
+            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterType.StringIn, Property = "Subject", Values = new List<object> { "a", "test", "in" } }, nameof(StringInAdvancedFilter) },
+            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterType.StringNotIn, Property = "Subject", Values = new List<object> { "a", "test", "notin" } }, nameof(StringNotInAdvancedFilter) },
+            new object[] { new ApiAdvancedFilter{ Type = Data.Enums.FilterType.NumberGreaterThan, Property = "Subject", Values = new List<object> { 5 } }, nameof(NumberGreaterThanAdvancedFilter) }
             
         };
 

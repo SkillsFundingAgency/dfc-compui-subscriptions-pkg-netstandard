@@ -1,6 +1,6 @@
 ﻿namespace DFC.Compui.Subscriptions.Pkg.NetStandard.Data.Enums
 {
-    public enum FilterTypeEnum
+    public enum FilterType
     {
         StringContains = 0,
         StringBeginsWith = 1,
