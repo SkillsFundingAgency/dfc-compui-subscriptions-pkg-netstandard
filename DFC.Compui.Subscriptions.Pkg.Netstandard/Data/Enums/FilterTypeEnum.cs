@@ -12,6 +12,7 @@
         NumberLessThan = 7,
         NumberLessThanOrEquals = 8,
         NumberGreaterThanOrEquals = 9,
-        BoolEquals = 10,
+        NumberGreaterThan = 10,
+        BoolEquals = 11,
     }
 }

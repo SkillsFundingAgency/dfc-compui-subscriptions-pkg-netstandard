@@ -9,6 +9,6 @@ namespace DFC.Compui.Subscriptions.Pkg.NetStandard.Data.Models
 
         public FilterTypeEnum Type { get; set; }
 
-        public List<string>? Values { get; set; }
+        public List<object>? Values { get; set; }
     }
 }
