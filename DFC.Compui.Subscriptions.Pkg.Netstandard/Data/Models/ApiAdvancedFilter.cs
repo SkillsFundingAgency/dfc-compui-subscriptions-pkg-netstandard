@@ -1,4 +1,7 @@
-﻿namespace DFC.Compui.Subscriptions.Pkg.NetStandard.Data.Models
+﻿using DFC.Compui.Subscriptions.Pkg.NetStandard.Data.Enums;
+using System.Collections.Generic;
+
+namespace DFC.Compui.Subscriptions.Pkg.NetStandard.Data.Models
 {
     public class ApiAdvancedFilter
     {
