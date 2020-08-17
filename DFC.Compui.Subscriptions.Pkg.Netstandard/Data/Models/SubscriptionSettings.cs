@@ -13,5 +13,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Data
         public Uri? Endpoint { get; set; }
 
         public SubscriptionFilter? Filter { get; set; }
+
+        public TimeSpan? CreationDelay { get; set; }
     }
 }

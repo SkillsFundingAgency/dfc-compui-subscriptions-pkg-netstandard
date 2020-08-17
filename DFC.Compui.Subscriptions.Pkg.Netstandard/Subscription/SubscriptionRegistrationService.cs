@@ -25,6 +25,11 @@ namespace DFC.Compui.Subscriptions.Pkg.NetStandard.Subscription.Services
 
         public async Task RegisterSubscription(string subscriptionName)
         {
+            if (settings.CurrentValue.CreationDelay != null)
+            {
+                await Task.Delay(settings.CurrentValue.CreationDelay.Value).ConfigureAwait(false);
+            }
+
             logger.LogInformation("Subscription registration started");
 
             this.ValidateSubscriptionSettings(this.settings.CurrentValue);
