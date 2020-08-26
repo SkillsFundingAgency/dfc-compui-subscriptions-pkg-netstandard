@@ -27,6 +27,7 @@ namespace DFC.Compui.Subscriptions.Pkg.NetStandard.Subscription.Services
         {
             logger.LogInformation("Subscription registration started");
 
+            this.settings.CurrentValue.Filter?.IncludeEventTypes?.RemoveAll(r => string.IsNullOrWhiteSpace(r));
             this.ValidateSubscriptionSettings(this.settings.CurrentValue);
 
             var webhookReceiverUrl = $"{settings.CurrentValue.Endpoint ?? throw new ArgumentException(nameof(settings.CurrentValue.Endpoint))}";
