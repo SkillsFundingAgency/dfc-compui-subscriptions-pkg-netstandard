@@ -32,6 +32,12 @@ namespace DFC.Compui.Subscriptions.Pkg.NetStandard.Subscription.Services
 
             var webhookReceiverUrl = $"{settings.CurrentValue.Endpoint ?? throw new ArgumentException(nameof(settings.CurrentValue.Endpoint))}";
 
+            if (this.settings.CurrentValue.SubscriptionRegistrationDelay != null)
+            {
+                logger.LogWarning($"Delaying registering subscription for endpoint: {webhookReceiverUrl}");
+                await Task.Delay(this.settings.CurrentValue.SubscriptionRegistrationDelay.Value).ConfigureAwait(false);
+            }
+
             logger.LogInformation($"Registering subscription for endpoint: {webhookReceiverUrl}");
 
             var subscriptionRequest = settings.CurrentValue;
