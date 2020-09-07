@@ -60,6 +60,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Netstandard.UnitTests
                 {
                     IncludeEventTypes = new List<string> { "published", "unpublished", "deleted" },
                 },
+                SubscriptionRegistrationDelay = new TimeSpan(0, 0, 5),
             };
             A.CallTo(() => configuration["Configuration:ApplicationName"]).Returns("test-app");
             A.CallTo(() => settings.CurrentValue).Returns(subscriptionSettings);
