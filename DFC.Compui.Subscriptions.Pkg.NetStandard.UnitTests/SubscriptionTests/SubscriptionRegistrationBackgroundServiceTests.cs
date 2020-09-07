@@ -98,7 +98,7 @@ namespace DFC.Compui.Subscriptions.Pkg.Netstandard.UnitTests
                 SubscriptionServiceEndpoint = new Uri("https://somewheretosubscribeto.com"),
                 Filter= new SubscriptionFilter
                 {
-                    IncludeEventTypes = new List<string> { "published", "", "unpublished", "", null, "deleted" },
+                    IncludeEventTypes = new List<string> { "published", string.Empty, "unpublished", " ", "deleted" },
                 },
             };
             A.CallTo(() => configuration["Configuration:ApplicationName"]).Returns("test-app");
